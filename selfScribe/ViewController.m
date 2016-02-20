@@ -171,39 +171,14 @@
 
 - (IBAction)nextLetterButtonPress:(id)sender
 {
-    if (!picsDict[currentChar])
+    if (!picsDict[currentChar])         // done with alphabet
     {
-        // done with alphabet
-        NSLog(@"end of list");
-        
+        // following is for testing
         NSLog(@"%@", [picsDict description]);
         
-        
-        //[self.mainImage setImage:[UIImage imageNamed:@"GoldenDome.jpeg"]];
-        UIImage *myImage = [picsDict[@"A"] objectAtIndex:0];
+        UIImage *myImage = [picsDict[@"B"] objectAtIndex:2];
         [self.mainImage setImage:myImage];
-        NSLog(@"got here");
-    }
-    else if ([picsDict[currentChar] count] == 1) // stay on this letter, add first pic to array
-    {
-        UIImage *myImage = [self captureView];
-        
-        NSLog(@"in first else if");
-        if (myImage == nil)
-        {
-            NSLog(@"main is null");
-            return;
-        }
-        else
-        {
-            [picsDict[currentChar] addObject:myImage];
-        }
-        
-        [self clearImage];
-        self.charLabel.text = currentChar;
-        
-        
-        
+        // until here
     }
     else if ([picsDict[currentChar] count] < (numEachLetter)) // stay on this letter, it needs more images
     {
@@ -218,11 +193,10 @@
         else
         {
             [picsDict[currentChar] addObject:myImage];
+            NSLog(@"saving %@ image number %lu", currentChar, (unsigned long)[picsDict[currentChar] count]);
         }
         [self clearImage];
         self.charLabel.text = currentChar;
-        
-        
         
     }
     else // move on to next letter
@@ -244,14 +218,17 @@
         if (myImage == nil)
         {
             NSLog(@"main is null");
-            [picsDict[currentChar] addObject:myImage];
+            return;
         }
         else
         {
             [picsDict[currentChar] addObject:myImage];
+            NSLog(@"saving %@ image number %lu", currentChar, (unsigned long)[picsDict[currentChar] count]);
+
         }
         [self clearImage];
         self.charLabel.text = currentChar;
+    
     }
 }
 
