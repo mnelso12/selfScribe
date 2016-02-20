@@ -177,6 +177,20 @@
     
 }
 
+- (UIImage *)captureTemplateView
+{
+    
+    CGRect rect = [self.view bounds];
+    
+    UIGraphicsBeginImageContext(rect.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    [self.view.layer renderInContext:context];
+    UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return img;
+    
+}
+
 - (void)makeFontArray
 {
     // for now, fontArr will be the first of each letter in the picsDict. Later, snazzy OCR mathy stuff will go here
@@ -205,7 +219,7 @@
     [self.view bringSubviewToFront:templateView];
     
     // add mini letter views to template
-    // coordinates for letter in position (x,y) = (15+36x, 58+40y, 24, 29)
+    // coordinates for letter in position (x,y) = (15+36x, 58+40y, 24, 29) ish
     
     NSMutableArray *arrOfViews = [[NSMutableArray alloc] init];
     
@@ -250,7 +264,7 @@
     [self.view bringSubviewToFront:templateView];
     
     
-    
+    UIImage *templateToUpload = [self captureTemplateView]; ///// HERE!
 }
 
 - (IBAction)nextLetterButtonPress:(id)sender
@@ -281,37 +295,21 @@
             NSLog(@"saving %@ image number %lu", currentChar, (unsigned long)[picsDict[currentChar] count]);
         }
         [self clearImage];
+        
+        if ([picsDict[currentChar] count] == 3)
+        {
+            unichar c = [currentChar characterAtIndex:0];
+            c++;
+            currentChar = [NSString stringWithCharacters:&c length:1];
+            
+            if (!picsDict[currentChar])
+            {
+                return; // done with list
+            }
+        }
+        
         self.charLabel.text = currentChar;
         
-    }
-    else // move on to next letter
-    {
-        unichar c = [currentChar characterAtIndex:0];
-        c++;
-
-        currentChar = [NSString stringWithCharacters:&c length:1];
-        if (!picsDict[currentChar]) // moved on to a letter that's not in the dictionary
-        {
-            [self clearImage];
-            return;
-        }
-        
-        UIImage *myImage = [self captureView];
-        
-        if (myImage == nil)
-        {
-            NSLog(@"main is null");
-            return;
-        }
-        else
-        {
-            [picsDict[currentChar] addObject:myImage];
-            NSLog(@"saving %@ image number %lu", currentChar, (unsigned long)[picsDict[currentChar] count]);
-
-        }
-        [self clearImage];
-        self.charLabel.text = currentChar;
-    
     }
 }
 
