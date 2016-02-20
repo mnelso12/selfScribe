@@ -29,6 +29,7 @@
     numEachLetter = 3; // could change later
     imgCount = 0; // for naming images
     
+    /*
     picsDict = [NSMutableDictionary dictionaryWithObjectsAndKeys:
         [NSMutableArray arrayWithObjects:[UIImage imageNamed:@"GoldenDome.jpeg"],nil], @"A",
         [NSMutableArray arrayWithObjects:[UIImage imageNamed:@"GoldenDome.jpeg"],nil], @"B",
@@ -38,6 +39,17 @@
         [NSMutableArray arrayWithObjects:[UIImage imageNamed:@"GoldenDome.jpeg"],nil], @"F",
         [NSMutableArray arrayWithObjects:[UIImage imageNamed:@"GoldenDome.jpeg"],nil], @"G",
         nil];
+     */
+    
+    picsDict = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                [NSMutableArray arrayWithObjects:nil], @"A",
+                [NSMutableArray arrayWithObjects:nil], @"B",
+                [NSMutableArray arrayWithObjects:nil], @"C",
+                [NSMutableArray arrayWithObjects:nil], @"D",
+                [NSMutableArray arrayWithObjects:nil], @"E",
+                [NSMutableArray arrayWithObjects:nil], @"F",
+                [NSMutableArray arrayWithObjects:nil], @"G",
+                nil];
     
     red = 0.0/255.0;
     green = 0.0/255.0;
@@ -168,19 +180,40 @@
         
         
         //[self.mainImage setImage:[UIImage imageNamed:@"GoldenDome.jpeg"]];
-        UIImage *myImage = [picsDict[@"A"] objectAtIndex:1];
+        UIImage *myImage = [picsDict[@"A"] objectAtIndex:0];
         [self.mainImage setImage:myImage];
         NSLog(@"got here");
     }
-    else if ([picsDict[currentChar] count] < (numEachLetter)) // stay on this letter
+    else if ([picsDict[currentChar] count] == 1) // stay on this letter, add first pic to array
     {
         UIImage *myImage = [self captureView];
         
-        NSLog(@"in if");
-        if (self.mainImage.image == nil)
+        NSLog(@"in first else if");
+        if (myImage == nil)
         {
             NSLog(@"main is null");
+            return;
+        }
+        else
+        {
             [picsDict[currentChar] addObject:myImage];
+        }
+        
+        [self clearImage];
+        self.charLabel.text = currentChar;
+        
+        
+        
+    }
+    else if ([picsDict[currentChar] count] < (numEachLetter)) // stay on this letter, it needs more images
+    {
+        UIImage *myImage = [self captureView];
+        
+        NSLog(@"in second else if");
+        if (myImage == nil)
+        {
+            NSLog(@"main is null");
+            return;
         }
         else
         {
