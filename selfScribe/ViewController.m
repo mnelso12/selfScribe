@@ -11,6 +11,7 @@
 @interface ViewController ()
 {
     NSMutableDictionary *picsDict;
+    NSMutableArray *fontArr; // A, B, ...
     NSString *currentChar;
     int numEachLetter;
     int imgCount;
@@ -169,6 +170,25 @@
     
 }
 
+- (void)makeFontArray
+{
+    // for now, fontArr will be the first of each letter in the picsDict. Later, snazzy OCR mathy stuff will go here
+    
+    fontArr = [[NSMutableArray alloc] init];
+    NSArray *letters = [[NSArray alloc] initWithObjects:@"A", @"B", @"C", @"D", @"E", @"F", @"G",nil];
+    
+    for (int i=0; i<[picsDict count]; i++)
+    {
+        NSMutableArray *arr = picsDict[letters[i]];
+        [fontArr addObject:[arr objectAtIndex:0]];
+        NSLog(@"arr = %@", [arr description]);
+         NSLog(@"fontArr = %@", [fontArr description]);
+    }
+    
+    NSLog(@"make font array: fontArr size = %lu", (unsigned long)[fontArr count]);
+    NSLog(@"fontArr = %@", [fontArr description]);
+}
+
 - (IBAction)nextLetterButtonPress:(id)sender
 {
     if (!picsDict[currentChar])         // done with alphabet
@@ -179,6 +199,8 @@
         UIImage *myImage = [picsDict[@"B"] objectAtIndex:2];
         [self.mainImage setImage:myImage];
         // until here
+        
+        [self makeFontArray];
     }
     else if ([picsDict[currentChar] count] < (numEachLetter)) // stay on this letter, it needs more images
     {
