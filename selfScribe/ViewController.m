@@ -28,19 +28,6 @@
     
     currentChar = @"A"; // just to start
     numEachLetter = 3; // could change later
-    imgCount = 0; // for naming images
-    
-    /*
-    picsDict = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-        [NSMutableArray arrayWithObjects:[UIImage imageNamed:@"GoldenDome.jpeg"],nil], @"A",
-        [NSMutableArray arrayWithObjects:[UIImage imageNamed:@"GoldenDome.jpeg"],nil], @"B",
-        [NSMutableArray arrayWithObjects:[UIImage imageNamed:@"GoldenDome.jpeg"],nil], @"C",
-        [NSMutableArray arrayWithObjects:[UIImage imageNamed:@"GoldenDome.jpeg"],nil], @"D",
-        [NSMutableArray arrayWithObjects:[UIImage imageNamed:@"GoldenDome.jpeg"],nil], @"E",
-        [NSMutableArray arrayWithObjects:[UIImage imageNamed:@"GoldenDome.jpeg"],nil], @"F",
-        [NSMutableArray arrayWithObjects:[UIImage imageNamed:@"GoldenDome.jpeg"],nil], @"G",
-        nil];
-     */
     
     picsDict = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                 [NSMutableArray arrayWithObjects:nil], @"A",
@@ -57,10 +44,30 @@
     blue = 0.0/255.0;
     brush = 10.0;
     opacity = 1.0;
-        
+    
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
+                                                  forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
+    self.navigationController.navigationBar.translucent = YES;
+    self.navigationController.view.backgroundColor = [UIColor clearColor];
+    
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
+    [[self.navigationController navigationBar] setHidden:YES];
+    self.navigationController.navigationBar.clipsToBounds = NO;
+    
+    // from irish bikes
+    [[UIApplication sharedApplication] setStatusBarHidden:YES animated:YES];
+    
     [self initializeImageViews];
     [self handleCharLabel];
 }
+
+/*
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
+}
+ */
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -181,12 +188,24 @@
     {
         NSMutableArray *arr = picsDict[letters[i]];
         [fontArr addObject:[arr objectAtIndex:0]];
-        NSLog(@"arr = %@", [arr description]);
-         NSLog(@"fontArr = %@", [fontArr description]);
     }
     
-    NSLog(@"make font array: fontArr size = %lu", (unsigned long)[fontArr count]);
-    NSLog(@"fontArr = %@", [fontArr description]);
+    [self fillTemplate];
+}
+
+- (void)fillTemplate
+{
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    CGFloat screenWidth = screenRect.size.width;
+    CGFloat screenHeight = screenRect.size.height;
+    
+    UIImageView *templateView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight)];
+    
+    templateView.image = [UIImage imageNamed:@"ScriptTemplate.png"];
+    [self.view bringSubviewToFront:templateView];
+    [self.view addSubview:templateView];
+    
+    
 }
 
 - (IBAction)nextLetterButtonPress:(id)sender

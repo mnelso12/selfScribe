@@ -68,6 +68,8 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="2C2-d8-l15"/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="charLabel" destination="NUW-Ly-yld" id="9gb-GJ-Ogf"/>
