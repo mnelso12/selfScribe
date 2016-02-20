@@ -33,6 +33,15 @@
                                 <rect key="frame" x="16" y="344" width="343" height="315"/>
                                 <accessibility key="accessibilityConfiguration" label="mainImage"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="Clear" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g5C-29-cCT" userLabel="Clear">
+                                <rect key="frame" x="164" y="277" width="37" height="30"/>
+                                <state key="normal" title="Clear">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="clearButtonPress:" destination="BYZ-38-t0r" eventType="touchUpInside" id="T8a-XA-Gad"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -53,6 +62,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="charLabel" destination="NUW-Ly-yld" id="9gb-GJ-Ogf"/>
+                        <outlet property="clearButton" destination="g5C-29-cCT" id="rJ3-Mc-vl5"/>
                         <outlet property="mainImage" destination="vda-8X-HIP" id="p8T-Cy-zDa"/>
                         <outlet property="tempDrawImage" destination="Vde-Ha-mmO" id="03E-ow-JMl"/>
                     </connections>

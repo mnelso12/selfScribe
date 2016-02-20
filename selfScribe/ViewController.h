@@ -20,6 +20,8 @@
 }
 
 @property (strong, nonatomic) IBOutlet UILabel *charLabel;
+@property (strong, nonatomic) IBOutlet UIButton *clearButton;
+- (IBAction)clearButtonPress:(id)sender;
 
 @property (strong, nonatomic) IBOutlet UIImageView *tempDrawImage;
 @property (strong, nonatomic) IBOutlet UIImageView *mainImage;

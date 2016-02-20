@@ -24,7 +24,7 @@
     brush = 10.0;
     opacity = 1.0;
     
-    self.view.backgroundColor = [UIColor blueColor];
+    //self.view.backgroundColor = [UIColor blueColor];
     
     [self initializeImageViews];
     [self handleCharLabel];
@@ -42,15 +42,15 @@
 
 - (void)initializeImageViews
 {
-    CGRect screenRect = [[UIScreen mainScreen] bounds];
-    CGFloat screenWidth = screenRect.size.width;
-    CGFloat screenHeight = screenRect.size.height;
+    //CGRect screenRect = [[UIScreen mainScreen] bounds];
+    //GFloat screenWidth = screenRect.size.width;
+    //CGFloat screenHeight = screenRect.size.height;
     
     //self.mainImage.frame = CGRectMake(0, screenHeight/2, screenWidth, screenHeight/2);
     //self.tempDrawImage.frame = CGRectMake(0, screenHeight/2, screenWidth, screenHeight/2);
     
-    self.mainImage.frame = CGRectMake(0, 100, 100, 100);
-    self.tempDrawImage.frame = CGRectMake(0, 100, 100, 100);
+    //self.mainImage.frame = CGRectMake(0, 100, 100, 100);
+    //self.tempDrawImage.frame = CGRectMake(0, 100, 100, 100);
 }
 
 
@@ -106,6 +106,20 @@
     [self.tempDrawImage.image drawInRect:CGRectMake(0, 0, self.tempDrawImage.frame.size.width,self.tempDrawImage.frame.size.height) blendMode:kCGBlendModeNormal alpha:opacity]; // changed this
     self.mainImage.image = UIGraphicsGetImageFromCurrentImageContext();
     self.tempDrawImage.image = nil;
+    UIGraphicsEndImageContext();
+}
+
+- (IBAction)clearButtonPress:(id)sender
+{
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    CGFloat screenWidth = screenRect.size.width;
+    CGFloat screenHeight = screenRect.size.height;
+    
+    UIGraphicsBeginImageContext(CGSizeMake(self.tempDrawImage.frame.size.width, self.tempDrawImage.frame.size.height));
+    [self.tempDrawImage.layer renderInContext:UIGraphicsGetCurrentContext()]; // changed from self.view.layer
+    self.tempDrawImage.image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    self.mainImage.image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
 }
 
