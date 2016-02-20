@@ -13,6 +13,8 @@
     NSMutableDictionary *picsDict;
     NSString *currentChar;
     int numEachLetter;
+    int imgCount;
+    UIImage *letterCopy;
 }
 
 @end
@@ -25,17 +27,16 @@
     
     currentChar = @"A"; // just to start
     numEachLetter = 3; // could change later
-    
-    //UIImage *tempImage; // for the sake of filling array in picsDict with something
+    imgCount = 0; // for naming images
     
     picsDict = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-        [NSMutableArray arrayWithObjects:nil], @"A",
-        [NSMutableArray arrayWithObjects:nil], @"B",
-        [NSMutableArray arrayWithObjects:nil], @"C",
-        [NSMutableArray arrayWithObjects:nil], @"D",
-        [NSMutableArray arrayWithObjects:nil], @"E",
-        [NSMutableArray arrayWithObjects:nil], @"F",
-        [NSMutableArray arrayWithObjects:nil], @"G",
+        [NSMutableArray arrayWithObjects:[UIImage imageNamed:@"GoldenDome.jpeg"],nil], @"A",
+        [NSMutableArray arrayWithObjects:[UIImage imageNamed:@"GoldenDome.jpeg"],nil], @"B",
+        [NSMutableArray arrayWithObjects:[UIImage imageNamed:@"GoldenDome.jpeg"],nil], @"C",
+        [NSMutableArray arrayWithObjects:[UIImage imageNamed:@"GoldenDome.jpeg"],nil], @"D",
+        [NSMutableArray arrayWithObjects:[UIImage imageNamed:@"GoldenDome.jpeg"],nil], @"E",
+        [NSMutableArray arrayWithObjects:[UIImage imageNamed:@"GoldenDome.jpeg"],nil], @"F",
+        [NSMutableArray arrayWithObjects:[UIImage imageNamed:@"GoldenDome.jpeg"],nil], @"G",
         nil];
     
     red = 0.0/255.0;
@@ -43,9 +44,7 @@
     blue = 0.0/255.0;
     brush = 10.0;
     opacity = 1.0;
-    
-    //self.view.backgroundColor = [UIColor blueColor];
-    
+        
     [self initializeImageViews];
     [self handleCharLabel];
 }
@@ -144,27 +143,83 @@
     UIGraphicsEndImageContext();
 }
 
+- (UIImage *)captureView
+{
+    
+    CGRect rect = [self.mainImage bounds];
+    
+    UIGraphicsBeginImageContext(rect.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    [self.mainImage.layer renderInContext:context];
+    UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return img;
+    
+}
+
 - (IBAction)nextLetterButtonPress:(id)sender
 {
     if (!picsDict[currentChar])
     {
         // done with alphabet
         NSLog(@"end of list");
+        
+        NSLog(@"%@", [picsDict description]);
+        
+        
+        //[self.mainImage setImage:[UIImage imageNamed:@"GoldenDome.jpeg"]];
+        UIImage *myImage = [picsDict[@"A"] objectAtIndex:1];
+        [self.mainImage setImage:myImage];
+        NSLog(@"got here");
     }
-    else if ([picsDict[currentChar] count] < (numEachLetter-1)) // stay on this letter
+    else if ([picsDict[currentChar] count] < (numEachLetter)) // stay on this letter
     {
-         NSLog(@"in if");
-        [picsDict[currentChar] addObject:self.mainImage];
+        UIImage *myImage = [self captureView];
+        
+        NSLog(@"in if");
+        if (self.mainImage.image == nil)
+        {
+            NSLog(@"main is null");
+            [picsDict[currentChar] addObject:myImage];
+        }
+        else
+        {
+            [picsDict[currentChar] addObject:myImage];
+        }
+        [self clearImage];
+        self.charLabel.text = currentChar;
+        
+        
+        
     }
     else // move on to next letter
     {
         NSLog(@"in else");
         unichar c = [currentChar characterAtIndex:0];
         c++;
+
         currentChar = [NSString stringWithCharacters:&c length:1];
+        if (!picsDict[currentChar]) // moved on to a letter that's not in the dictionary
+        {
+            NSLog(@"not going to letter %@ thats not int picsDict", currentChar);
+            [self clearImage];
+            return;
+        }
+        
+        UIImage *myImage = [self captureView];
+        
+        if (myImage == nil)
+        {
+            NSLog(@"main is null");
+            [picsDict[currentChar] addObject:myImage];
+        }
+        else
+        {
+            [picsDict[currentChar] addObject:myImage];
+        }
+        [self clearImage];
+        self.charLabel.text = currentChar;
     }
-    
-     [self clearImage];
-     self.charLabel.text = currentChar;
 }
+
 @end
