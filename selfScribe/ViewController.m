@@ -9,6 +9,11 @@
 #import "ViewController.h"
 
 @interface ViewController ()
+{
+    NSMutableDictionary *picsDict;
+    NSString *currentChar;
+    int numEachLetter;
+}
 
 @end
 
@@ -17,6 +22,21 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    
+    currentChar = @"A"; // just to start
+    numEachLetter = 3; // could change later
+    
+    //UIImage *tempImage; // for the sake of filling array in picsDict with something
+    
+    picsDict = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+        [NSMutableArray arrayWithObjects:nil], @"A",
+        [NSMutableArray arrayWithObjects:nil], @"B",
+        [NSMutableArray arrayWithObjects:nil], @"C",
+        [NSMutableArray arrayWithObjects:nil], @"D",
+        [NSMutableArray arrayWithObjects:nil], @"E",
+        [NSMutableArray arrayWithObjects:nil], @"F",
+        [NSMutableArray arrayWithObjects:nil], @"G",
+        nil];
     
     red = 0.0/255.0;
     green = 0.0/255.0;
@@ -37,7 +57,7 @@
 
 - (void)handleCharLabel
 {
-    self.charLabel.text = @"A";
+    self.charLabel.text = currentChar;
 }
 
 - (void)initializeImageViews
@@ -111,10 +131,11 @@
 
 - (IBAction)clearButtonPress:(id)sender
 {
-    CGRect screenRect = [[UIScreen mainScreen] bounds];
-    CGFloat screenWidth = screenRect.size.width;
-    CGFloat screenHeight = screenRect.size.height;
-    
+    [self clearImage];
+}
+
+- (void)clearImage
+{
     UIGraphicsBeginImageContext(CGSizeMake(self.tempDrawImage.frame.size.width, self.tempDrawImage.frame.size.height));
     [self.tempDrawImage.layer renderInContext:UIGraphicsGetCurrentContext()]; // changed from self.view.layer
     self.tempDrawImage.image = UIGraphicsGetImageFromCurrentImageContext();
@@ -123,4 +144,27 @@
     UIGraphicsEndImageContext();
 }
 
+- (IBAction)nextLetterButtonPress:(id)sender
+{
+    if (!picsDict[currentChar])
+    {
+        // done with alphabet
+        NSLog(@"end of list");
+    }
+    else if ([picsDict[currentChar] count] < (numEachLetter-1)) // stay on this letter
+    {
+         NSLog(@"in if");
+        [picsDict[currentChar] addObject:self.mainImage];
+    }
+    else // move on to next letter
+    {
+        NSLog(@"in else");
+        unichar c = [currentChar characterAtIndex:0];
+        c++;
+        currentChar = [NSString stringWithCharacters:&c length:1];
+    }
+    
+     [self clearImage];
+     self.charLabel.text = currentChar;
+}
 @end

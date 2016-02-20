@@ -34,12 +34,21 @@
                                 <accessibility key="accessibilityConfiguration" label="mainImage"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="Clear" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g5C-29-cCT" userLabel="Clear">
-                                <rect key="frame" x="164" y="277" width="37" height="30"/>
-                                <state key="normal" title="Clear">
+                                <rect key="frame" x="70" y="277" width="38" height="30"/>
+                                <state key="normal" title="Undo">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="clearButtonPress:" destination="BYZ-38-t0r" eventType="touchUpInside" id="T8a-XA-Gad"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qP0-Vc-y9U">
+                                <rect key="frame" x="208" y="277" width="119" height="30"/>
+                                <state key="normal" title="Done / next letter">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="nextLetterButtonPress:" destination="BYZ-38-t0r" eventType="touchUpInside" id="d5g-1I-Nl0"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -64,6 +73,7 @@
                         <outlet property="charLabel" destination="NUW-Ly-yld" id="9gb-GJ-Ogf"/>
                         <outlet property="clearButton" destination="g5C-29-cCT" id="rJ3-Mc-vl5"/>
                         <outlet property="mainImage" destination="vda-8X-HIP" id="p8T-Cy-zDa"/>
+                        <outlet property="nextLetterButton" destination="qP0-Vc-y9U" id="ehu-sd-uLi"/>
                         <outlet property="tempDrawImage" destination="Vde-Ha-mmO" id="03E-ow-JMl"/>
                     </connections>
                 </viewController>
