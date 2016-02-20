@@ -203,7 +203,52 @@
     
     templateView.image = [UIImage imageNamed:@"ScriptTemplate.png"];
     [self.view bringSubviewToFront:templateView];
+    
+    // add mini letter views to template
+    // coordinates for letter in position (x,y) = (15+36x, 58+40y, 24, 29)
+    
+    NSMutableArray *arrOfViews = [[NSMutableArray alloc] init];
+    
+    int extraX = 0;
+    int extraY = 0;
+    
+    for (int i=0; i<10; i++)
+    {
+        if (((i+1)%3 == 0) && (i != 0))
+        {
+            extraX++;
+        }
+        for (int j=0; j<9; j++)
+        {
+            if (((j)%5 == 0))
+            {
+                extraY++;
+            }
+            
+            UIImageView *smallView = [[UIImageView alloc] initWithFrame:CGRectMake((15+36*i - extraX), (58+40*j+extraY), 24, 29)];
+            smallView.image = [fontArr objectAtIndex:((i+j)%7)];
+            //smallView.image = [UIImage imageNamed:@"GoldenDome.jpeg"];
+            [arrOfViews addObject:smallView];
+        }
+        extraY = 0;
+    }
+    
+    // put little views from array onto templateView
+    for (UIImageView *iv in arrOfViews)
+    {
+        [templateView addSubview:iv];
+    }
+    
+    //NSLog(@"arrOfViews: %@", [arrOfViews description]);
+    //UIImageView *smallView2 = [[UIImageView alloc] initWithFrame:CGRectMake(50, 98, 24, 29)];
+    //smallView.image = [fontArr objectAtIndex:0];
+    //smallView2.image = [UIImage imageNamed:@"GoldenDome.jpeg"];
+    //[templateView addSubview:smallView2];
+
+    
     [self.view addSubview:templateView];
+    [self.view bringSubviewToFront:templateView];
+    
     
     
 }
@@ -225,7 +270,6 @@
     {
         UIImage *myImage = [self captureView];
         
-        NSLog(@"in second else if");
         if (myImage == nil)
         {
             NSLog(@"main is null");
@@ -242,14 +286,12 @@
     }
     else // move on to next letter
     {
-        NSLog(@"in else");
         unichar c = [currentChar characterAtIndex:0];
         c++;
 
         currentChar = [NSString stringWithCharacters:&c length:1];
         if (!picsDict[currentChar]) // moved on to a letter that's not in the dictionary
         {
-            NSLog(@"not going to letter %@ thats not int picsDict", currentChar);
             [self clearImage];
             return;
         }
