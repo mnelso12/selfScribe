@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="kBW-bX-rRa">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -16,21 +17,37 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NUW-Ly-yld">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NUW-Ly-yld">
                                 <rect key="frame" x="16" y="93" width="343" height="176"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="176" id="GEQ-IR-2Uu"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="138"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vde-Ha-mmO" userLabel="tempDrawImage">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Vde-Ha-mmO" userLabel="tempDrawImage">
                                 <rect key="frame" x="16" y="344" width="343" height="315"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vda-8X-HIP">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vda-8X-HIP">
                                 <rect key="frame" x="16" y="344" width="343" height="315"/>
                                 <accessibility key="accessibilityConfiguration" label="mainImage"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="vda-8X-HIP" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="7LH-0L-SYD"/>
+                            <constraint firstItem="Vde-Ha-mmO" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="9sZ-cm-BPf"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="vda-8X-HIP" secondAttribute="bottom" constant="8" symbolic="YES" id="Eb7-e9-eJ0"/>
+                            <constraint firstItem="Vde-Ha-mmO" firstAttribute="top" secondItem="NUW-Ly-yld" secondAttribute="bottom" constant="75" id="NmV-bY-HCD"/>
+                            <constraint firstItem="NUW-Ly-yld" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="29" id="NrD-bQ-w3Y"/>
+                            <constraint firstItem="NUW-Ly-yld" firstAttribute="leading" secondItem="vda-8X-HIP" secondAttribute="leading" id="Xrp-Io-8PR"/>
+                            <constraint firstItem="vda-8X-HIP" firstAttribute="trailing" secondItem="Vde-Ha-mmO" secondAttribute="trailing" id="Y7Y-6C-FPo"/>
+                            <constraint firstItem="vda-8X-HIP" firstAttribute="trailing" secondItem="NUW-Ly-yld" secondAttribute="trailing" id="dfP-Gq-MWC"/>
+                            <constraint firstItem="vda-8X-HIP" firstAttribute="top" secondItem="Vde-Ha-mmO" secondAttribute="top" id="fez-vj-kr4"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Vde-Ha-mmO" secondAttribute="bottom" constant="8" symbolic="YES" id="sdM-kD-thB"/>
+                            <constraint firstItem="vda-8X-HIP" firstAttribute="leading" secondItem="Vde-Ha-mmO" secondAttribute="leading" id="xT7-Tv-ncj"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="2C2-d8-l15"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
