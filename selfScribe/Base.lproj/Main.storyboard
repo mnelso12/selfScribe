@@ -22,6 +22,13 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vde-Ha-mmO" userLabel="tempDrawImage">
+                                <rect key="frame" x="16" y="344" width="343" height="315"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vda-8X-HIP">
+                                <rect key="frame" x="16" y="344" width="343" height="315"/>
+                                <accessibility key="accessibilityConfiguration" label="mainImage"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -29,6 +36,8 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="charLabel" destination="NUW-Ly-yld" id="9gb-GJ-Ogf"/>
+                        <outlet property="mainImage" destination="vda-8X-HIP" id="p8T-Cy-zDa"/>
+                        <outlet property="tempDrawImage" destination="Vde-Ha-mmO" id="03E-ow-JMl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

@@ -9,8 +9,20 @@
 #import <UIKit/UIKit.h>
 
 @interface ViewController : UIViewController
+{
+    CGPoint lastPoint;
+    CGFloat red;
+    CGFloat green;
+    CGFloat blue;
+    CGFloat brush;
+    CGFloat opacity;
+    BOOL mouseSwiped;
+}
 
 @property (strong, nonatomic) IBOutlet UILabel *charLabel;
+
+@property (strong, nonatomic) IBOutlet UIImageView *tempDrawImage;
+@property (strong, nonatomic) IBOutlet UIImageView *mainImage;
 
 @end
 
