@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import <QuartzCore/QuartzCore.h>
+#import "myFontsVC.h"
 
 @interface ViewController ()
 {
@@ -456,6 +457,14 @@
     saveFontButton.backgroundColor = [UIColor colorWithRed:102/255. green:255/255. blue:178/255. alpha:1];
     saveToCameraButton.backgroundColor = [UIColor colorWithRed:102/255. green:255/255. blue:178/255. alpha:1];
     
+    [saveFontButton addTarget:self
+                 action:@selector(savingFont)
+       forControlEvents:UIControlEventTouchUpInside];
+    [saveToCameraButton addTarget:self
+                       action:@selector(savingToCameraRoll)
+             forControlEvents:UIControlEventTouchUpInside];
+    
+    
     [self.view addSubview:saveToCameraButton];
     [self.view addSubview:saveFontButton];
     
@@ -480,5 +489,24 @@
     [self makeButtonsTemplateScreen];
     
 }
+
+- (IBAction)savingFont
+{
+    ///////// save font to defaults here //////////////////
+    
+    myFontsVC *myNewVC = [[myFontsVC alloc] init];
+    
+    // do any setup you need for myNewVC
+    
+    [self presentModalViewController:myNewVC animated:YES];
+}
+
+- (IBAction)savingToCameraRoll
+{
+    /////// save to camera roll here ///////////
+    NSLog(@"save to camera roll here");
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 
 @end
