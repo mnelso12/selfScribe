@@ -17,6 +17,8 @@
     int imgCount;
     UIImage *letterCopy;
     NSMutableArray *glyphPts;
+    NSMutableArray *arrOfGlyphPts;
+    NSMutableArray *glyphStringsArr;
     NSString *glyphDString;
 }
 
@@ -271,16 +273,16 @@
     UIImage *templateToUpload = [self captureTemplateView]; // this is template, potentially send this in an email to the user
 }
 
-- (NSString *)glyphPtsToStr
+- (NSString *)glyphPtsToStr(NSMutableArray *arr)
 {
     // separate points into "x y"
     
     NSMutableArray *arr = [[NSMutableArray alloc] init];
     int next = 0;
     
-    for (int i = 0; i < [glyphPts count]; i++)
+    for (int i = 0; i < [arr count]; i++)
     {
-        NSValue *ptVal = [glyphPts objectAtIndex:i];
+        NSValue *ptVal = [arr objectAtIndex:i];
         CGPoint pt = [ptVal CGPointValue];
         CGFloat xVal = pt.x;
         CGFloat yVal = pt.y;
@@ -320,9 +322,9 @@
     
     }
     
-    glyphDString = [NSString stringWithFormat:@"%@%@%@", @"d=\"",[arr componentsJoinedByString:@""],@"\" />"];
     
-    return glyphDString;
+    
+    return [NSString stringWithFormat:@"%@%@%@", @"d=\"",[arr componentsJoinedByString:@""],@"\" />"];
 }
 
 
@@ -330,16 +332,13 @@
 {
     if (!picsDict[currentChar])         // done with alphabet
     {
-        //NSLog(@"glyph points array: %@", [glyphPts description]);
-        NSLog(@"string? %@", [self glyphPtsToStr]);
-        
-        [self makeFontArray];
-        [self fillTemplate];
-        
+        [self analyzeResults];
     }
     else if ([picsDict[currentChar] count] < (numEachLetter)) // stay on this letter, it needs more images
     {
         UIImage *myImage = [self captureView];
+        
+        [arrOfGlyphPts addObject:glyphPts];
         
         if (myImage == nil)
         {
@@ -368,6 +367,16 @@
         self.charLabel.text = currentChar;
         
     }
+}
+
+- (void)analyzeResults
+{
+    //NSLog(@"string? %@", [self glyphPtsToStr]);
+    glyphDString = [self glyphPtsToStr]; // pass glyphPts to this function somehow
+    
+    [self makeFontArray];
+    [self fillTemplate];
+    
 }
 
 @end
