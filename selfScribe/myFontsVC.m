@@ -17,8 +17,13 @@
 - (void)viewDidLoad
 {
     self.view.backgroundColor = [UIColor colorWithRed:102/255. green:255/255. blue:178/255. alpha:1];
-    tableData = [NSArray arrayWithObjects:@"Egg Benedict", @"Mushroom Risotto", @"Full Breakfast", @"Hamburger", @"Ham and Egg Sandwich", @"Creme Brelee", @"White Chocolate Donut", @"Starbucks Coffee", @"Vegetable Curry", @"Instant Noodle with Egg", @"Noodle with BBQ Pork", @"Japanese Noodle with Pork", @"Green Tea", @"Thai Shrimp Cake", @"Angry Birds Cake", @"Ham and Cheese Panini", nil];
+    tableData = [NSArray arrayWithObjects:@"madelyn", @"cursive", @"boldFont", nil];
     
+    UIImageView *notebook = [[UIImageView alloc] init];
+    notebook.image = [UIImage imageNamed:@"notebook.jpg"];
+    UIView *middleView = [[UIView alloc] init];
+    [middleView addSubview:notebook];
+    self.tableView.backgroundView = notebook;
     
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
                                                   forBarMetrics:UIBarMetricsDefault];
@@ -50,14 +55,16 @@
 - (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     UIView *headerView = [[UIView alloc] init];
-    [headerView setBackgroundColor:[UIColor colorWithRed:102/255. green:255/255. blue:178/255. alpha:1]];
-   
+    //[headerView setBackgroundColor:[UIColor colorWithRed:102/255. green:255/255. blue:178/255. alpha:1]];
+    [headerView setBackgroundColor:[UIColor clearColor]];
+    
     UILabel *myLabel = [[UILabel alloc] init];
-    myLabel.frame = CGRectMake(0, 22, 400, 67);
+    myLabel.frame = CGRectMake(0, 22, 400, 69);
     myLabel.font = [UIFont fontWithName:@"Verdana-Bold" size:50];
     myLabel.text = [self tableView:tableView titleForHeaderInSection:section];
     myLabel.textColor = [UIColor colorWithRed:0/255. green:4/255. blue:101/255. alpha:1];
-    myLabel.backgroundColor = [UIColor colorWithRed:255/255. green:255/255. blue:180/255. alpha:1];
+    //myLabel.backgroundColor = [UIColor colorWithRed:255/255. green:118/255. blue:251/255. alpha:1];
+    myLabel.backgroundColor = [UIColor clearColor];
     
     [headerView addSubview:myLabel];
     
@@ -89,9 +96,9 @@
     UIView *selectionView = [[UIView alloc] init];
     selectionView.backgroundColor = [UIColor colorWithRed:102/255. green:255/255. blue:178/255. alpha:1];
     cell.selectedBackgroundView = selectionView;
-    
     cell.textLabel.highlightedTextColor = [UIColor colorWithRed:0/255. green:4/255. blue:101/255. alpha:1];
     
+    [cell.imageView setImage:[UIImage imageNamed:@"GoldenDome.jpeg"]];
     
     return cell;
 }
