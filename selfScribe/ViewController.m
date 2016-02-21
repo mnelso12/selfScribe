@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface ViewController ()
 {
@@ -76,7 +77,6 @@
     [self.view bringSubviewToFront:self.tempDrawImage];
     
     
-    [self initializeImageViews];
     [self handleCharLabel];
 }
 
@@ -89,20 +89,6 @@
 {
     self.charLabel.text = currentChar;
 }
-
-- (void)initializeImageViews
-{
-    //CGRect screenRect = [[UIScreen mainScreen] bounds];
-    //GFloat screenWidth = screenRect.size.width;
-    //CGFloat screenHeight = screenRect.size.height;
-    
-    //self.mainImage.frame = CGRectMake(0, screenHeight/2, screenWidth, screenHeight/2);
-    //self.tempDrawImage.frame = CGRectMake(0, screenHeight/2, screenWidth, screenHeight/2);
-    
-    //self.mainImage.frame = CGRectMake(0, 100, 100, 100);
-    //self.tempDrawImage.frame = CGRectMake(0, 100, 100, 100);
-}
-
 
 // from http://www.raywenderlich.com/18840/how-to-make-a-simple-drawing-app-with-uikit
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
@@ -438,6 +424,43 @@
     return entireGlyphString;
 }
 
+- (void)makeButtonsTemplateScreen
+{
+    UIButton *saveFontButton = [[UIButton alloc] initWithFrame:CGRectMake(25, 500, 150,70)];
+    UIButton *saveToCameraButton = [[UIButton alloc] initWithFrame:CGRectMake(200, 500, 150,70)];
+    
+    [saveFontButton setTitle:@"save font" forState:UIControlStateNormal];
+    [saveToCameraButton setTitle:@"save to camera roll" forState:UIControlStateNormal];
+    
+    [saveFontButton.titleLabel setFont:[UIFont fontWithName:@"Verdana" size:20.0]];
+    [saveToCameraButton.titleLabel setFont:[UIFont fontWithName:@"Verdana" size:20.0]];
+    
+    
+    saveToCameraButton.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    saveToCameraButton.titleLabel.numberOfLines = 0;
+    
+    [saveFontButton setTitleColor:[UIColor colorWithRed:0/255. green:4/255. blue:101/255. alpha:1] forState: UIControlStateNormal];
+    [saveToCameraButton setTitleColor:[UIColor colorWithRed:0/255. green:4/255. blue:101/255. alpha:1] forState: UIControlStateNormal];
+    
+    saveFontButton.layer.cornerRadius = 10; // this value vary as per your desire
+    saveFontButton.clipsToBounds = YES;
+    saveToCameraButton.layer.cornerRadius = 10; // this value vary as per your desire
+    saveToCameraButton.clipsToBounds = YES;
+    
+    
+    [[saveFontButton layer] setBorderWidth:4.0f];
+    [[saveToCameraButton layer] setBorderWidth:4.0f];
+    [saveToCameraButton.layer setBorderColor:[UIColor colorWithRed:0/255. green:4/255. blue:101/255. alpha:1].CGColor];
+    [saveFontButton.layer setBorderColor:[UIColor colorWithRed:0/255. green:4/255. blue:101/255. alpha:1].CGColor];
+
+    saveFontButton.backgroundColor = [UIColor colorWithRed:102/255. green:255/255. blue:178/255. alpha:1];
+    saveToCameraButton.backgroundColor = [UIColor colorWithRed:102/255. green:255/255. blue:178/255. alpha:1];
+    
+    [self.view addSubview:saveToCameraButton];
+    [self.view addSubview:saveFontButton];
+    
+}
+
 - (void)analyzeResults
 {
     //NSLog(@"string? %@", [self glyphPtsToDStr]);
@@ -453,6 +476,8 @@
     
     [self makeFontArray];
     [self fillTemplate];
+    
+    [self makeButtonsTemplateScreen];
     
 }
 
