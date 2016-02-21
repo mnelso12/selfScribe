@@ -57,6 +57,7 @@
     brush = 10.0;
     opacity = 1.0;
     
+    
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
                                                   forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.shadowImage = [UIImage new];
@@ -67,8 +68,8 @@
     [[self.navigationController navigationBar] setHidden:YES];
     self.navigationController.navigationBar.clipsToBounds = NO;
     
-    // from irish bikes
-    [[UIApplication sharedApplication] setStatusBarHidden:YES animated:YES];
+// from irish bikes
+    //[[UIApplication sharedApplication] setStatusBarHidden:YES animated:YES];
     
 
     [self.view bringSubviewToFront:self.mainImage];
@@ -236,6 +237,16 @@
 
 - (void)fillTemplate
 {
+    // handle status bar
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
+    [[self.navigationController navigationBar] setHidden:YES];
+    self.navigationController.navigationBar.clipsToBounds = NO;
+    
+    // from irish bikes
+    [[UIApplication sharedApplication] setStatusBarHidden:YES animated:YES];
+    
+    
+    
     CGRect screenRect = [[UIScreen mainScreen] bounds];
     CGFloat screenWidth = screenRect.size.width;
     CGFloat screenHeight = screenRect.size.height;
