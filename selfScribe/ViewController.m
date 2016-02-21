@@ -35,6 +35,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
+    
+    fontName = [[NSString alloc] initWithString:[NSString stringWithString:@"madelynFont"]];
+    
     hasDrawing = NO;
     currentChar = @"A"; // just to start
     numEachLetter = 2; // could change later
@@ -423,12 +426,12 @@
     //NSLog(@"string? %@", [self glyphPtsToDStr]);
     
     
-    NSLog(@"array of glyphPts arrays count = %lu", (unsigned long)[arrOfGlyphPts count]);
+    //NSLog(@"array of glyphPts arrays count = %lu", (unsigned long)[arrOfGlyphPts count]);
     
     // do this for all of the glyphPts arrays in arr
     NSLog(@"glyphPts : %@", glyphPts);
     glyphDString = [self glyphPtsToDStr:glyphPts];
-    //NSString *str = [self makeGlyphStr:glyphDString withCharName:@"S"];
+    NSString *str = [self makeGlyphStr:glyphDString withCharName:@"S"];
     
     
     [self makeFontArray];

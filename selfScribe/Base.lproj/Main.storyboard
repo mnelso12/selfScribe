@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="kBW-bX-rRa">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="f6z-42-25Y">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -81,25 +81,124 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1191.5" y="336.5"/>
+            <point key="canvasLocation" x="1239.5" y="406.5"/>
+        </scene>
+        <!--myFontsVC-->
+        <scene sceneID="pUX-yb-gSZ">
+            <objects>
+                <viewController title="myFontsVC" id="dRa-cj-JwT" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Poe-mu-1BY"/>
+                        <viewControllerLayoutGuide type="bottom" id="3da-Pq-Fcn"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="zua-2Q-9hh">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fqV-xt-PGZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="914" y="1183"/>
+        </scene>
+        <!--HomeVC-->
+        <scene sceneID="l0L-hV-OQ6">
+            <objects>
+                <viewController title="HomeVC" id="Ez1-qN-t2p" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="u95-dg-9vW"/>
+                        <viewControllerLayoutGuide type="bottom" id="gA6-qA-VqM"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="41r-Gr-hUL">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9IO-hp-8Vw">
+                                <rect key="frame" x="169" y="429" width="36" height="30"/>
+                                <state key="normal" title="Write">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="4rA-5B-pO9" kind="show" id="riO-1i-TeP"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qLU-qS-8c0">
+                                <rect key="frame" x="129" y="343" width="116" height="30"/>
+                                <state key="normal" title="Create New Font">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="BYZ-38-t0r" kind="show" id="AyP-sd-BZd"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ta3-ol-rOU">
+                                <rect key="frame" x="155" y="517" width="64" height="30"/>
+                                <state key="normal" title="My Fonts">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="dRa-cj-JwT" kind="show" id="w8b-6N-vAq"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="EhX-Bl-VQZ"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Mcr-EK-NfY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="580" y="407"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="cvo-XB-fGx">
+        <scene sceneID="kpk-rb-4Wu">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="kBW-bX-rRa" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="f6z-42-25Y" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="S1O-RW-QC6">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="2XY-17-NDq">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="Bxd-tP-9Vm"/>
+                        <segue destination="Ez1-qN-t2p" kind="relationship" relationship="rootViewController" id="wVQ-c4-ZlO"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="0W2-J7-zVw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dYf-gw-NMU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="380" y="337"/>
+            <point key="canvasLocation" x="-128" y="407"/>
+        </scene>
+        <!--WriteVC-->
+        <scene sceneID="TH9-ye-pEc">
+            <objects>
+                <viewController title="WriteVC" id="4rA-5B-pO9" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="wOj-HR-6Qk"/>
+                        <viewControllerLayoutGuide type="bottom" id="bh6-2s-j1u"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="hvp-Mb-AyM">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BQ8-FV-UtE">
+                                <rect key="frame" x="209" y="101" width="68" height="30"/>
+                                <state key="normal" title="fontName">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="dRa-cj-JwT" kind="show" id="DIP-Zv-0Km"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tNa-ZZ-DrH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-60" y="1161"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="DIP-Zv-0Km"/>
+    </inferredMetricsTieBreakers>
 </document>
