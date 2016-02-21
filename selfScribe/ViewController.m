@@ -16,10 +16,15 @@
     int numEachLetter;
     int imgCount;
     UIImage *letterCopy;
-    NSMutableArray *glyphPts;
-    NSMutableArray *arrOfGlyphPts;
-    NSMutableArray *glyphStringsArr;
-    NSString *glyphDString;
+    
+    BOOL hasDrawing;
+    
+    NSString *fontName; // let the user choose this!!!!!!!!!!!!!
+    
+    NSMutableArray *glyphPts; // 26x3 (changes value) : each char has 3 of these, 1 per drawing
+    NSMutableArray *arrOfGlyphPts; // 1 : array of the 26 (not 26x3!) total glyphPts arrays
+    NSMutableArray *glyphStringsArr; // 1 : array of the full glyph string for each letter
+    NSString *glyphDString; // 26 (changes value) : "d=..." substring of each glyph
 }
 
 @end
@@ -30,18 +35,16 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
+    hasDrawing = NO;
     currentChar = @"A"; // just to start
-    numEachLetter = 3; // could change later
+    numEachLetter = 2; // could change later
     
+    glyphDString = [[NSString alloc] init];
+    arrOfGlyphPts = [[NSMutableArray alloc] init];
     glyphPts = [[NSMutableArray alloc] init];
     picsDict = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                 [NSMutableArray arrayWithObjects:nil], @"A",
                 [NSMutableArray arrayWithObjects:nil], @"B",
-                [NSMutableArray arrayWithObjects:nil], @"C",
-                [NSMutableArray arrayWithObjects:nil], @"D",
-                [NSMutableArray arrayWithObjects:nil], @"E",
-                [NSMutableArray arrayWithObjects:nil], @"F",
-                [NSMutableArray arrayWithObjects:nil], @"G",
                 nil];
     
     red = 0.0/255.0;
@@ -92,15 +95,16 @@
 
 
 // from http://www.raywenderlich.com/18840/how-to-make-a-simple-drawing-app-with-uikit
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
     mouseSwiped = NO;
     UITouch *touch = [touches anyObject];
     lastPoint = [touch locationInView:self.tempDrawImage]; // changed from self.view to self.tempDrawImage
 }
 
-- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
-    
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    hasDrawing = YES;
     mouseSwiped = YES;
     UITouch *touch = [touches anyObject];
     CGPoint currentPoint = [touch locationInView:self.tempDrawImage]; // changed from self.view to self.tempDrawImage
@@ -122,7 +126,7 @@
     lastPoint = currentPoint;
     
     [glyphPts addObject:[NSValue valueWithCGPoint:currentPoint]];
-    NSLog(@"glyph points array: %@", [glyphPts description]);
+    //NSLog(@"glyph points array: %@", [glyphPts description]);
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -130,7 +134,7 @@
     //NSLog(@"MOUSE LIFTED!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
     CGPoint resetPt = {0,0};
     [glyphPts addObject:[NSValue valueWithCGPoint:resetPt]];
-    NSLog(@"glyph points array: %@", [glyphPts description]);
+    //NSLog(@"glyph points array: %@", [glyphPts description]);
     
     if(!mouseSwiped) {
         UIGraphicsBeginImageContext(self.tempDrawImage.frame.size); // changed from self.view.frame.size to self.tempDrawImage.frame.size
@@ -202,7 +206,7 @@
     // for now, fontArr will be the first of each letter in the picsDict. Later, snazzy OCR mathy stuff will go here
     
     fontArr = [[NSMutableArray alloc] init];
-    NSArray *letters = [[NSArray alloc] initWithObjects:@"A", @"B", @"C", @"D", @"E", @"F", @"G",nil];
+    NSArray *letters = [[NSArray alloc] initWithObjects:@"A",@"B",@"C",nil];
     
     for (int i=0; i<[picsDict count]; i++)
     {
@@ -254,7 +258,7 @@
             }
             
             UIImageView *smallView = [[UIImageView alloc] initWithFrame:CGRectMake((15+36*i - extraX), (58+40*j+extraY), 24, 29)];
-            smallView.image = [fontArr objectAtIndex:((i+j)%7)];
+            smallView.image = [fontArr objectAtIndex:((i+j)%2)];
             [arrOfViews addObject:smallView];
         }
         extraY = 0;
@@ -273,16 +277,93 @@
     UIImage *templateToUpload = [self captureTemplateView]; // this is template, potentially send this in an email to the user
 }
 
-- (NSString *)glyphPtsToStr(NSMutableArray *arr)
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+- (IBAction)nextLetterButtonPress:(id)sender
+{
+    if (!picsDict[currentChar])         // done with alphabet
+    {
+        [self analyzeResults];
+    }
+    else if ([picsDict[currentChar] count] < (numEachLetter)) // stay on this letter, it needs more images
+    {
+        
+        // check for blank drawings
+        if (!hasDrawing)
+        {
+            NSLog(@"You must draw something fool!");
+            return;
+        }
+        else
+        {
+            hasDrawing = NO;
+        }
+        
+        
+        
+        UIImage *myImage = [self captureView];
+        
+        [arrOfGlyphPts addObject:glyphPts];
+        [glyphPts removeAllObjects]; // clear between letter instances
+        
+        if (myImage == nil)
+        {
+            NSLog(@"main is null");
+            return;
+        }
+        else
+        {
+            [picsDict[currentChar] addObject:myImage];
+            NSLog(@"saving %@ image number %lu", currentChar, (unsigned long)[picsDict[currentChar] count]);
+        }
+        [self clearImage];
+        
+        if ([picsDict[currentChar] count] == numEachLetter)
+        {
+            unichar c = [currentChar characterAtIndex:0];
+            c++;
+            currentChar = [NSString stringWithCharacters:&c length:1];
+            
+            if (!picsDict[currentChar])
+            {
+                return; // done with list
+            }
+        }
+        
+        self.charLabel.text = currentChar;
+        
+    }
+}
+
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+- (NSString *)glyphPtsToDStr:(NSMutableArray *) inArr
 {
     // separate points into "x y"
     
     NSMutableArray *arr = [[NSMutableArray alloc] init];
     int next = 0;
     
-    for (int i = 0; i < [arr count]; i++)
+    for (int i = 0; i < [inArr count]; i++)
     {
-        NSValue *ptVal = [arr objectAtIndex:i];
+        NSValue *ptVal = [inArr objectAtIndex:i];
         CGPoint pt = [ptVal CGPointValue];
         CGFloat xVal = pt.x;
         CGFloat yVal = pt.y;
@@ -299,8 +380,9 @@
             continue;
         }
         
-
-        if ((xVal == 0.) && (yVal == 0)) // reset point, indicates that finger was lifted with "M", reset new line
+        
+        // adds XML letters
+        if ((xVal == 0.) && (yVal == 0.)) // reset point, indicates that finger was lifted with "M", reset new line
         {
             xStr = @" M";
             next = 1;
@@ -319,60 +401,35 @@
             [arr addObject:xStr];
             [arr addObject:yStr];
         }
-    
+        
     }
     
-    
-    
+     // puts "d=..." stuff around it
     return [NSString stringWithFormat:@"%@%@%@", @"d=\"",[arr componentsJoinedByString:@""],@"\" />"];
 }
 
 
-- (IBAction)nextLetterButtonPress:(id)sender
+- (NSString *)makeGlyphStr:(NSString *)dStr withCharName:(NSString *)charName
 {
-    if (!picsDict[currentChar])         // done with alphabet
-    {
-        [self analyzeResults];
-    }
-    else if ([picsDict[currentChar] count] < (numEachLetter)) // stay on this letter, it needs more images
-    {
-        UIImage *myImage = [self captureView];
-        
-        [arrOfGlyphPts addObject:glyphPts];
-        
-        if (myImage == nil)
-        {
-            NSLog(@"main is null");
-            return;
-        }
-        else
-        {
-            [picsDict[currentChar] addObject:myImage];
-            NSLog(@"saving %@ image number %lu", currentChar, (unsigned long)[picsDict[currentChar] count]);
-        }
-        [self clearImage];
-        
-        if ([picsDict[currentChar] count] == 3)
-        {
-            unichar c = [currentChar characterAtIndex:0];
-            c++;
-            currentChar = [NSString stringWithCharacters:&c length:1];
-            
-            if (!picsDict[currentChar])
-            {
-                return; // done with list
-            }
-        }
-        
-        self.charLabel.text = currentChar;
-        
-    }
+    NSString *glyphNameLine = [[NSString alloc] initWithString:[NSString stringWithFormat:@"%@%@%@%@%@",@"<glyph glyph-name=\"",fontName,@"\" unicode=\"",charName,@"\"\n"]];
+    NSString *entireGlyphString = [[NSString alloc] initWithString:[NSString stringWithFormat:@"%@%@%@",glyphNameLine,@"\n",dStr]];
+    NSLog(@"entire glyph chunk : %@", entireGlyphString);
+    
+    return entireGlyphString;
 }
 
 - (void)analyzeResults
 {
-    //NSLog(@"string? %@", [self glyphPtsToStr]);
-    glyphDString = [self glyphPtsToStr]; // pass glyphPts to this function somehow
+    //NSLog(@"string? %@", [self glyphPtsToDStr]);
+    
+    
+    NSLog(@"array of glyphPts arrays count = %lu", (unsigned long)[arrOfGlyphPts count]);
+    
+    // do this for all of the glyphPts arrays in arr
+    NSLog(@"glyphPts : %@", glyphPts);
+    glyphDString = [self glyphPtsToDStr:glyphPts];
+    //NSString *str = [self makeGlyphStr:glyphDString withCharName:@"S"];
+    
     
     [self makeFontArray];
     [self fillTemplate];
