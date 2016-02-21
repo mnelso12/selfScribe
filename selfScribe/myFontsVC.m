@@ -7,6 +7,7 @@
 //
 
 #import "myFontsVC.h"
+#import "WriteVC.h"
 
 @implementation myFontsVC
 {
@@ -101,6 +102,33 @@
     [cell.imageView setImage:[UIImage imageNamed:@"GoldenDome.jpeg"]];
     
     return cell;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // remember which font was chosen here
+    [self choseFont];
+}
+
+- (IBAction)choseFont
+{
+    ///////// save font to defaults here //////////////////
+    
+    //WriteVC *myNewVC = [[WriteVC alloc] init];
+    
+    // do any setup you need for myNewVC
+    
+    //[self performSegueWithIdentifier:@"shaqSegue" sender:self];
+    
+    //[self presentModalViewController:myNewVC animated:YES];
+    
+    
+    
+    
+    // remember chosen font, go to root, then go to WriteVC
+    [self.navigationController popToRootViewControllerAnimated:YES];
+
+    
 }
 
 @end
