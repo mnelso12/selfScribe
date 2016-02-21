@@ -10,4 +10,6 @@
 
 @interface menuVC : UIViewController
 
+//@property (strong, nonatomic) NSDictionary *myFonts;
+
 @end

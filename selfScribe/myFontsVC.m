@@ -12,6 +12,7 @@
 @implementation myFontsVC
 {
     NSArray *tableData;
+    NSMutableDictionary *picsDict;
 }
 
 
@@ -121,8 +122,6 @@
     //[self performSegueWithIdentifier:@"shaqSegue" sender:self];
     
     //[self presentModalViewController:myNewVC animated:YES];
-    
-    
     
     
     // remember chosen font, go to root, then go to WriteVC

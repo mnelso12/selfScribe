@@ -10,7 +10,7 @@
 
 @interface WriteVC : UIViewController
 
-@property (strong, nonatomic) IBOutlet UITextField *textField;
+//@property (strong, nonatomic) IBOutlet UITextField *textField;
 @property (strong, nonatomic) IBOutlet UIImageView *typingView;
 
 //- (NSUInteger) LengthOfStringInTextInput:(NSObject<UITextInput> *textContainer);

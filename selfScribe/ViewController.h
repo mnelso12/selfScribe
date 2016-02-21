@@ -17,6 +17,7 @@
     CGFloat brush;
     CGFloat opacity;
     BOOL mouseSwiped;
+    
 }
 
 @property (strong, nonatomic) IBOutlet UILabel *charLabel;
@@ -29,6 +30,8 @@
 @property (strong, nonatomic) IBOutlet UIImageView *mainImage;
 @property (strong, nonatomic) IBOutlet UIImageView *whiteBackground;
 @property (strong, nonatomic) IBOutlet UIImageView *tempImageView;
+
+extern NSMutableDictionary *picsDict;
 
 @end
 

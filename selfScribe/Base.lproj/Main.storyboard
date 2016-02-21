@@ -232,10 +232,13 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="19F-oU-RZe">
+                                <rect key="frame" x="24" y="62" width="327" height="325"/>
+                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BQ8-FV-UtE">
-                                <rect key="frame" x="175" y="23" width="210" height="36"/>
+                                <rect key="frame" x="158" y="16" width="210" height="50"/>
                                 <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="31"/>
-                                <state key="normal" title="fontName">
+                                <state key="normal" title="cursive">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -243,20 +246,11 @@
                                     <segue destination="dRa-cj-JwT" kind="show" id="DIP-Zv-0Km"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="19F-oU-RZe">
-                                <rect key="frame" x="24" y="62" width="327" height="325"/>
-                            </imageView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="D3d-ye-YLU">
-                                <rect key="frame" x="30" y="395" width="279" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
-                        <outlet property="textField" destination="D3d-ye-YLU" id="vjt-Yz-tny"/>
                         <outlet property="typingView" destination="19F-oU-RZe" id="YpB-T4-5Il"/>
                     </connections>
                 </viewController>

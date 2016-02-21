@@ -9,10 +9,15 @@
 #import "WriteVC.h"
 
 @implementation WriteVC
+{
+    NSMutableDictionary *picsDict;
+}
 
 -(void)viewDidLoad
 {
-    //self.textField.hidden = NO;
+    self.view.backgroundColor = [UIColor colorWithRed:102/255. green:255/255. blue:178/255. alpha:1];
+    
+    //self.textField.hidden = YES;
     //[self.textField becomeFirstResponder];
     
     UITapGestureRecognizer *singleFingerTap =
@@ -57,8 +62,6 @@
             tag++;
             
             [arrOfMiniViews addObject:miniView];
-            //[self.view addSubview:miniView];
-            //[self.view bringSubviewToFront:miniView];
         }
         
     }
@@ -72,8 +75,6 @@
     }
     
     [self.view addSubview:keyboardView];
-    //[self.view bringSubviewToFront:keyboardView];
-    
 }
 
 
