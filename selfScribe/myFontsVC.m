@@ -25,6 +25,13 @@
     return [tableData count];
 }
 
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 90;
+}
+
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *simpleTableIdentifier = @"SimpleTableItem";
@@ -36,6 +43,12 @@
     }
     
     cell.textLabel.text = [tableData objectAtIndex:indexPath.row];
+    
+    //[UIColor colorWithRed:102/255. green:255/255. blue:178/255. alpha:1];
+    cell.backgroundColor = [UIColor colorWithRed:0/255. green:4/255. blue:101/255. alpha:1];
+    cell.textLabel.textColor = [UIColor colorWithRed:102/255. green:255/255. blue:178/255. alpha:1];
+    UIFont *myFont = [UIFont fontWithName:@"Verdana" size:50];
+    cell.textLabel.font = myFont;
     return cell;
 }
 
