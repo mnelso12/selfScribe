@@ -16,6 +16,8 @@
     int numEachLetter;
     int imgCount;
     UIImage *letterCopy;
+    NSMutableArray *glyphPts;
+    NSString *glyphDString;
 }
 
 @end
@@ -29,6 +31,7 @@
     currentChar = @"A"; // just to start
     numEachLetter = 3; // could change later
     
+    glyphPts = [[NSMutableArray alloc] init];
     picsDict = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                 [NSMutableArray arrayWithObjects:nil], @"A",
                 [NSMutableArray arrayWithObjects:nil], @"B",
@@ -61,13 +64,6 @@
     [self initializeImageViews];
     [self handleCharLabel];
 }
-
-/*
-- (UIStatusBarStyle)preferredStatusBarStyle
-{
-    return UIStatusBarStyleLightContent;
-}
- */
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -122,9 +118,17 @@
     UIGraphicsEndImageContext();
     
     lastPoint = currentPoint;
+    
+    [glyphPts addObject:[NSValue valueWithCGPoint:currentPoint]];
+    NSLog(@"glyph points array: %@", [glyphPts description]);
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    
+    //NSLog(@"MOUSE LIFTED!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+    CGPoint resetPt = {0,0};
+    [glyphPts addObject:[NSValue valueWithCGPoint:resetPt]];
+    NSLog(@"glyph points array: %@", [glyphPts description]);
     
     if(!mouseSwiped) {
         UIGraphicsBeginImageContext(self.tempDrawImage.frame.size); // changed from self.view.frame.size to self.tempDrawImage.frame.size
@@ -203,9 +207,17 @@
         NSMutableArray *arr = picsDict[letters[i]];
         [fontArr addObject:[arr objectAtIndex:0]];
     }
-    
-    [self fillTemplate];
 }
+
+// postman - chrome way to send post requests to online service
+// need to send post request (not just url bar)
+// userfile_url
+// svg file!
+// always shop teachers - (Iron Yard)
+// general assemly - in UK, office in London, boot camp for web dev etc. (Make School - best guy to talk to is CEO jeremy@makeschool.com)
+// code.org
+
+
 
 - (void)fillTemplate
 {
@@ -241,7 +253,6 @@
             
             UIImageView *smallView = [[UIImageView alloc] initWithFrame:CGRectMake((15+36*i - extraX), (58+40*j+extraY), 24, 29)];
             smallView.image = [fontArr objectAtIndex:((i+j)%7)];
-            //smallView.image = [UIImage imageNamed:@"GoldenDome.jpeg"];
             [arrOfViews addObject:smallView];
         }
         extraY = 0;
@@ -253,32 +264,78 @@
         [templateView addSubview:iv];
     }
     
-    //NSLog(@"arrOfViews: %@", [arrOfViews description]);
-    //UIImageView *smallView2 = [[UIImageView alloc] initWithFrame:CGRectMake(50, 98, 24, 29)];
-    //smallView.image = [fontArr objectAtIndex:0];
-    //smallView2.image = [UIImage imageNamed:@"GoldenDome.jpeg"];
-    //[templateView addSubview:smallView2];
-
-    
     [self.view addSubview:templateView];
     [self.view bringSubviewToFront:templateView];
     
     
-    UIImage *templateToUpload = [self captureTemplateView]; ///// HERE!
+    UIImage *templateToUpload = [self captureTemplateView]; // this is template, potentially send this in an email to the user
 }
+
+- (NSString *)glyphPtsToStr
+{
+    // separate points into "x y"
+    
+    NSMutableArray *arr = [[NSMutableArray alloc] init];
+    int next = 0;
+    
+    for (int i = 0; i < [glyphPts count]; i++)
+    {
+        NSValue *ptVal = [glyphPts objectAtIndex:i];
+        CGPoint pt = [ptVal CGPointValue];
+        CGFloat xVal = pt.x;
+        CGFloat yVal = pt.y;
+        
+        NSString *xStr;
+        NSString *yStr;
+        if (next == 1) // if previous point was a restart point
+        {
+            xStr = [NSString stringWithFormat:@" M%d ", (int)xVal];
+            yStr = [NSString stringWithFormat:@"%d", (int)yVal]; // y is always normal for this
+            [arr addObject:xStr];
+            [arr addObject:yStr];
+            next = 0;
+            continue;
+        }
+        
+
+        if ((xVal == 0.) && (yVal == 0)) // reset point, indicates that finger was lifted with "M", reset new line
+        {
+            xStr = @" M";
+            next = 1;
+        }
+        else if (i == 0) // if first point of all
+        {
+            xStr = [NSString stringWithFormat:@"M%d ", (int)xVal];
+            yStr = [NSString stringWithFormat:@"%d", (int)yVal]; // y is always normal for this
+            [arr addObject:xStr];
+            [arr addObject:yStr];
+        }
+        else // use L to connect the points
+        {
+            xStr = [NSString stringWithFormat:@" L%d ", (int)xVal];
+            yStr = [NSString stringWithFormat:@"%d", (int)yVal]; // y is always normal for this
+            [arr addObject:xStr];
+            [arr addObject:yStr];
+        }
+    
+    }
+    
+    glyphDString = [NSString stringWithFormat:@"%@%@%@", @"d=\"",[arr componentsJoinedByString:@""],@"\" />"];
+    
+    return glyphDString;
+}
+
 
 - (IBAction)nextLetterButtonPress:(id)sender
 {
     if (!picsDict[currentChar])         // done with alphabet
     {
-        // following is for testing
-        NSLog(@"%@", [picsDict description]);
-        
-        UIImage *myImage = [picsDict[@"B"] objectAtIndex:2];
-        [self.mainImage setImage:myImage];
-        // until here
+        //NSLog(@"glyph points array: %@", [glyphPts description]);
+        NSLog(@"string? %@", [self glyphPtsToStr]);
         
         [self makeFontArray];
+        [self fillTemplate];
+        
     }
     else if ([picsDict[currentChar] count] < (numEachLetter)) // stay on this letter, it needs more images
     {
