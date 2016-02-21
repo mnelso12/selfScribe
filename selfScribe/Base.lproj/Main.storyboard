@@ -145,7 +145,7 @@
         <!--menuVC-->
         <scene sceneID="l0L-hV-OQ6">
             <objects>
-                <viewController storyboardIdentifier="menuVC" title="menuVC" id="Ez1-qN-t2p" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="menuVC" title="menuVC" id="Ez1-qN-t2p" customClass="menuVC" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="u95-dg-9vW"/>
                         <viewControllerLayoutGuide type="bottom" id="gA6-qA-VqM"/>
@@ -255,6 +255,6 @@
         <image name="white.jpeg" width="400" height="400"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="TD7-di-7ER"/>
+        <segue reference="DIP-Zv-0Km"/>
     </inferredMetricsTieBreakers>
 </document>
