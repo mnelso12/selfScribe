@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5A0E741D1C797CAD002E291F /* menuVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A0E741C1C797CAD002E291F /* menuVC.m */; };
+		5A0E741F1C798299002E291F /* white.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 5A0E741E1C798299002E291F /* white.jpeg */; };
 		5A4952F41C789815001456D4 /* GoldenDome.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 5A4952F31C789815001456D4 /* GoldenDome.jpeg */; };
 		5A4952F51C78C219001456D4 /* GoldenDome.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 5A4952F31C789815001456D4 /* GoldenDome.jpeg */; };
 		5A4952F71C78E53F001456D4 /* ScriptTemplate.png in Resources */ = {isa = PBXBuildFile; fileRef = 5A4952F61C78E53F001456D4 /* ScriptTemplate.png */; };
@@ -30,6 +32,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5A0E741B1C797CAD002E291F /* menuVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = menuVC.h; sourceTree = "<group>"; };
+		5A0E741C1C797CAD002E291F /* menuVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = menuVC.m; sourceTree = "<group>"; };
+		5A0E741E1C798299002E291F /* white.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = white.jpeg; sourceTree = "<group>"; };
 		5A4952F31C789815001456D4 /* GoldenDome.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = GoldenDome.jpeg; path = selfScribeTests/GoldenDome.jpeg; sourceTree = SOURCE_ROOT; };
 		5A4952F61C78E53F001456D4 /* ScriptTemplate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ScriptTemplate.png; sourceTree = "<group>"; };
 		5A7C8DC51C78338E000F7276 /* selfScribe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = selfScribe.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -89,10 +94,13 @@
 				5A4952F31C789815001456D4 /* GoldenDome.jpeg */,
 				5A7C8DCC1C78338E000F7276 /* AppDelegate.h */,
 				5A7C8DCD1C78338E000F7276 /* AppDelegate.m */,
+				5A0E741B1C797CAD002E291F /* menuVC.h */,
+				5A0E741C1C797CAD002E291F /* menuVC.m */,
 				5A7C8DCF1C78338E000F7276 /* ViewController.h */,
 				5A7C8DD01C78338E000F7276 /* ViewController.m */,
 				5A4952F61C78E53F001456D4 /* ScriptTemplate.png */,
 				5A7C8DD21C78338E000F7276 /* Main.storyboard */,
+				5A0E741E1C798299002E291F /* white.jpeg */,
 				5A7C8DD51C78338F000F7276 /* Images.xcassets */,
 				5A7C8DD71C78338F000F7276 /* LaunchScreen.xib */,
 				5A7C8DC81C78338E000F7276 /* Supporting Files */,
@@ -211,6 +219,7 @@
 				5A7C8DD41C78338E000F7276 /* Main.storyboard in Resources */,
 				5A7C8DD91C78338F000F7276 /* LaunchScreen.xib in Resources */,
 				5A7C8DD61C78338F000F7276 /* Images.xcassets in Resources */,
+				5A0E741F1C798299002E291F /* white.jpeg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -230,6 +239,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5A7C8DD11C78338E000F7276 /* ViewController.m in Sources */,
+				5A0E741D1C797CAD002E291F /* menuVC.m in Sources */,
 				5A7C8DCE1C78338E000F7276 /* AppDelegate.m in Sources */,
 				5A7C8DCB1C78338E000F7276 /* main.m in Sources */,
 			);

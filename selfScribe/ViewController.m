@@ -35,6 +35,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
+    self.view.backgroundColor = [UIColor colorWithRed:102/255. green:255/255. blue:178/255. alpha:1];
     
     fontName = [[NSString alloc] initWithString:[NSString stringWithString:@"madelynFont"]];
     
@@ -68,6 +69,11 @@
     
     // from irish bikes
     [[UIApplication sharedApplication] setStatusBarHidden:YES animated:YES];
+    
+
+    [self.view bringSubviewToFront:self.mainImage];
+    [self.view bringSubviewToFront:self.tempDrawImage];
+    
     
     [self initializeImageViews];
     [self handleCharLabel];

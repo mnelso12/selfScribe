@@ -27,6 +27,7 @@
 
 @property (strong, nonatomic) IBOutlet UIImageView *tempDrawImage;
 @property (strong, nonatomic) IBOutlet UIImageView *mainImage;
+@property (strong, nonatomic) IBOutlet UIImageView *whiteBackground;
 @property (strong, nonatomic) IBOutlet UIImageView *tempImageView;
 
 @end
